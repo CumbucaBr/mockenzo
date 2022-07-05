@@ -4,7 +4,56 @@ Mockenzo is a library to help developers and testers to create mock servers in a
 
 It is a library compatible with all types of unit and integration tests.
 
-## how to use
+## Installation
+Use your favorite package manager to install:
+
+```bash
+npm install mockenzo --dev
+```
+
+```bash
+yarn add mockenzo -D
+```
+
+## Usage
+
+
+````javascript
+const Mockenzo = require("mockenzo")
+
+Mockenzo()
+    .on(3000)//listen on port
+    .post('/enzo')//init config route
+        .delay(3000)//add delay for response
+        .statusCode(400)//send status code
+        .response({
+            'error_code': 400,
+            'error_description': 'Bad Request'
+        })
+        .run()//finish config and run
+    .get('/enzo')//init new route
+        .statusCode(401)
+        .response({
+            'error_code': 401,
+            'error_description': 'Unauthorized'
+        })
+        .run()
+    .get('/enzos')
+        .statusCode(200)
+        .responseJsonFile('../sample/mocks/list.json')
+        .run()
+    .start(() => {
+        console.log("server is running")
+    });
+````
+
+## Sample
+
+```bash
+yarn standalone
+```
+
+## How to use
 
 <table>
     <thead>
@@ -60,38 +109,3 @@ It is a library compatible with all types of unit and integration tests.
         <td>finish the route configuration and run</td>
     </tr>
 </table>
-
-
-## sample
-
-run `node sample/standalone.js`
-
-````javascript
-const Mockenzo = require("../index")
-
-Mockenzo()
-    .on(3000)//listen on port
-    .post('/enzo')//init config route
-        .delay(3000)//add delay for response
-        .statusCode(400)//send status code
-        .response({
-            'error_code': 400,
-            'error_description': 'Bad Request'
-        })
-        .run()//finish config and run
-    .get('/enzo')//init new route
-        .statusCode(401)
-        .response({
-            'error_code': 401,
-            'error_description': 'Unauthorized'
-        })
-        .run()
-    .get('/enzos')
-        .statusCode(200)
-        .responseJsonFile('../sample/mocks/list.json')
-        .run()
-    .start(() => {
-        console.log("server is running")
-    });
-````
-
