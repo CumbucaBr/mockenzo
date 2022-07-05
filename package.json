@@ -1,13 +1,23 @@
 {
   "name": "mockenzo",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "main": "index.js",
   "repository": "https://github.com/CumbucaBr/mockenzo.git",
   "author": "Charleston Anjos <charleston.anjos@gmail.com>",
   "license": "MIT",
+  "keywords": [
+    "mockserver",
+    "server",
+    "server-javascript",
+    "mock",
+    "mocks",
+    "mockjs",
+    "mockjavascript"
+  ],
   "scripts": {
     "standalone": "node sample/standalone.js",
-    "publish": "npm publish --access public"
+    "publish": "npm publish --access public",
+    "publish:readme": "npm publish --readme"
   },
   "dependencies": {
     "express": "^4.18.1",
