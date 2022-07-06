@@ -15,11 +15,12 @@ npm install mockenzo --dev
 yarn add mockenzo -D
 ```
 
-## Usage
+## Usage 
 
 
 ````javascript
-const Mockenzo = require("mockenzo")
+const Mockenzo = require('mockenzo')//javascript / typescript
+const mockJsonFile = require('./path/mock_jsonfile_response200.json')
 
 Mockenzo()
     .on(3000)//listen on port
@@ -40,7 +41,7 @@ Mockenzo()
         .run()
     .get('/enzos')
         .statusCode(200)
-        .responseJsonFile('../sample/mocks/list.json')
+        .responseJsonFile(jsonFile)
         .run()
     .start(() => {
         console.log("server is running")
@@ -97,8 +98,8 @@ yarn standalone
         <td>Response object</td>
     </tr>
     <tr>
-        <td>responseJsonFile('')</td>
-        <td>Response file json object (path source project)</td>
+        <td>responseJsonFile(file)</td>
+        <td>Response file json object (add file json using require)</td>
     </tr>
     <tr>
         <td>delay(timeMilliseconds)</td>
