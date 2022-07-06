@@ -1,5 +1,3 @@
-const path = require("path");
-
 module.exports = function () {
     const express = require('express');
     const app = express();
@@ -91,8 +89,7 @@ module.exports = function () {
             return this;
         },
         responseJsonFile: function (jsonFile) {
-            let pathFile = path.join(__dirname, jsonFile)
-            config.response = require(pathFile);
+            config.response = jsonFile;
             return this;
         },
         delay: function (delay) {
@@ -107,7 +104,7 @@ module.exports = function () {
         start: function (run) {
             builderRequests();
             app.listen(portAddress || 3636);
-            run()
+            if (run) run()
         },
         stop: function () {
             app.close()
