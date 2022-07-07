@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/mockenzo.svg)](https://badge.fury.io/js/mockenzo)
+
 # Mockenzo mock-server
 
 Mockenzo is a library to help developers and testers to create mock servers in an easy and practical way
@@ -67,7 +69,7 @@ yarn standalone
     </thead>
     <tr>
         <td>on(port)</td>
-        <td>Create server listening port</td>
+        <td>Create server listening port | default port is 3000</td>
     </tr>
     <tr>
         <td>get('/')</td>
@@ -108,5 +110,17 @@ yarn standalone
     <tr>
         <td>run()</td>
         <td>finish the route configuration and run</td>
+    </tr>
+    <tr>
+        <td>start()</td>
+        <td>initialize mock server</td>
+    </tr>
+    <tr>
+        <td>start(function(){})</td>
+        <td>initialize mock server and execute function when initialize</td>
+    </tr>
+    <tr>
+        <td>stop()</td>
+        <td>stop mock server - finishing instance</td>
     </tr>
 </table>
