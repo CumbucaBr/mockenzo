@@ -3,8 +3,10 @@ module.exports = function () {
     const app = express();
     app.use(express.json())
 
-    let portAddress;
+    const portDefault = 3000
 
+    let appListener;
+    let portAddress;
     let configs = [];
 
     let config = {
@@ -103,11 +105,13 @@ module.exports = function () {
         },
         start: function (run) {
             builderRequests();
-            app.listen(portAddress || 3636);
+            appListener = app.listen(portAddress || portDefault);
             if (run) run()
+
+            return this;
         },
         stop: function () {
-            app.close()
+            appListener.close()
         }
     };
 };
