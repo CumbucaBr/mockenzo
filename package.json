@@ -1,6 +1,6 @@
 {
   "name": "mockenzo",
-  "version": "1.0.5",
+  "version": "2.0.0",
   "main": "index.js",
   "repository": "https://github.com/CumbucaBr/mockenzo.git",
   "author": "Charleston Anjos <charleston.anjos@gmail.com>",
@@ -12,7 +12,11 @@
     "mock",
     "mocks",
     "mockjs",
-    "mockjavascript"
+    "mockjavascript",
+    "socket",
+    "socket-server",
+    "mocksocket",
+    "socketmock"
   ],
   "scripts": {
     "standalone": "node sample/standalone.js",
@@ -20,6 +24,7 @@
     "publish:readme": "npm publish --readme"
   },
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "ws": "^8.8.0"
   }
 }
