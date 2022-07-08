@@ -174,33 +174,41 @@ yarn standalone
     <tr>
         <td>onConnection</td>
         <td>method callled when receive new client connection</td>
+        <td></td>
     </tr>
     <tr>
         <td>onMessage(data)</td>
         <td>method called when client send message</td>
+        <td></td>
     </tr>
     <tr>
         <td>onError</td>
         <td>method called when a server error occurs</td>
+        <td></td>
     </tr>
     <tr>
         <td>onClose</td>
         <td>method callend when client close connection</td>
+        <td></td>
     </tr>
     <tr>
         <td>disconnect()</td>
         <td>disconnect all clients</td>
+        <td></td>
     </tr>
     <tr>
         <td>start()</td>
         <td>initialize mock server</td>
+        <td></td>
     </tr>
     <tr>
         <td>start(function(){})</td>
         <td>initialize mock server and execute function when initialize</td>
+        <td></td>
     </tr>
     <tr>
         <td>stop()</td>
         <td>stop mock server - finishing instance</td>
+        <td></td>
     </tr>
 </table>
