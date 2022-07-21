@@ -1,7 +1,10 @@
 module.exports = function() {
     const express = require('express');
+    const cors = require("cors");
+
     const app = express();
     app.use(express.json())
+    app.user(cors())
 
     const portDefault = 3000
 
