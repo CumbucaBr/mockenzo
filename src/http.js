@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports = function () {
     const express = require('express');
     const cors = require("cors");
 
@@ -25,7 +25,7 @@ module.exports = function() {
         configs.forEach((config) => {
             switch (config.method) {
                 case 'GET':
-                    app.get(config.path, handlerRequest(config));
+                    app.get(config.path || config.route, handlerRequest(config));
                     break;
                 case 'POST':
                     app.post(config.path, handlerRequest(config));
@@ -101,8 +101,15 @@ module.exports = function() {
             config.delay = delay;
             return this;
         },
-        run: function () {
-            configs.push(config);
+        run: function (configRoute) {
+            if (Array.isArray(configRoute)) {
+                configs.push(...configRoute)
+            } else if (configRoute) {
+                configs.push(configRoute);
+            } else {
+                configs.push(config);
+            }
+
             config = {};
             return this;
         },
