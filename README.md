@@ -55,6 +55,17 @@ Mockenzo()
 
 ## HTTP Mock Server with ObjectConfig
 ````
+Object Route Config
+{
+    route: '/products',
+    statusCode: 200,
+    method: 'GET',
+    delay: 500,
+    response: [{name: 'Product 1'}, {name: 'Product 2'}]
+}
+````
+
+````javascript
 Mockenzo().http()
     .on(3000)
     .run([{
