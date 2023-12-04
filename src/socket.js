@@ -1,11 +1,17 @@
-module.exports = function () {
-    const WebSocket = require('ws');
-    const portDefault = 3001;
-    const pathDefault = '/'
+const http = require("http");
+const socketIO = require('socket.io');
 
-    let server;
-    let pathAddress;
+module.exports = function () {
+    const portDefault = 3001;
+    const httpServer = http.createServer(requestHandler);
+
+    let socketServer;
     let portAddress;
+
+    function requestHandler(req, res) {
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.end('Servidor Socket.IO');
+    }
 
     const config = {
         onConnection: function () {
@@ -21,13 +27,12 @@ module.exports = function () {
     }
 
     function bind() {
-        server.on('connection', config.onConnection)
-        server.on('close', config.onClose)
+        socketServer.on('connection', config.onConnection)
+        socketServer.on('close', config.onClose)
     }
 
     return {
-        on: function (path, port) {
-            pathAddress = path;
+        on: function (port) {
             portAddress = port;
             return this;
         },
@@ -41,56 +46,49 @@ module.exports = function () {
         },
         onMessage: function (run) {
             config.onMessage = function (data, isBinary) {
-                if(run) run(isBinary ? data : data.toString())
+                if (run) run(isBinary ? data : data.toString())
             }
             return this;
         },
         onError: function (run) {
             config.onError = function (error) {
-                if(run) run(error)
+                if (run) run(error)
             }
             return this;
         },
         onClose: function (run) {
             config.onClose = function () {
-                if(run) run()
+                if (run) run()
             }
             return this;
         },
         send: function (data) {
-            server.clients.forEach(function each(client) {
-                if (client.readyState === client.OPEN) {
-                    client.send(data)
-                }
-            });
+            socketServer.emit('message', data);
             return this;
         },
         clients: function () {
-            return server.clients;
+            return httpServer.clients;
         },
         start: function (run) {
-            server = new WebSocket.WebSocketServer({
-                path: pathAddress || pathDefault,
-                port: portAddress || portDefault
+            httpServer.listen(portAddress || portDefault, () => {
+                if (run) run()
             });
+
+            socketServer = socketIO(httpServer);
 
             bind();
 
-            if(run) run()
+
 
             return this;
         },
         disconnect: function () {
-            server.clients.forEach((socket) => {
-                if ([socket.OPEN, socket.CLOSING].includes(socket.readyState)) {
-                    socket.terminate();
-                }
-            });
+            socketServer.emit('message', 'client disconnected');
             return this;
         },
-        stop: function (){
+        stop: function () {
             this.disconnect();
-            server.close()
+            httpServer.close()
         }
     }
 }
