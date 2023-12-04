@@ -93,7 +93,7 @@ const Mockenzo = require('mockenzo')//javascript / typescript
 
 const mockenzo = Mockenzo()
     .socket()
-        .on('/', 3001)
+        .on(3001)
             .onConnection(() => {
                 console.log('received new connection')
             })
