@@ -19,15 +19,15 @@ Mockenzo().http()
         console.log("http server is running")
     });
 
-const socketMockenzo = Mockenzo()
+Mockenzo()
     .socket()
     .on(3001)
     .onConnection(() => {
         console.log('received new connection')
     })
-    .onMessage((data) => {
-        console.log(data)//print message sent to server
-        socketMockenzo.send("successful")//clients receive "successful"
+    .onMessage((ws, data) => {
+        console.log('on message', data)
+        ws.emit('message', 'message received of client');
     })
     .onError((error) => {
         console.error('received error', error)
