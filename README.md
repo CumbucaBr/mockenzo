@@ -97,9 +97,9 @@ const mockenzo = Mockenzo()
             .onConnection(() => {
                 console.log('received new connection')
             })
-            .onMessage((data) => {
+            .onMessage((ws, data) => {
                 console.log(data)//print message sent to server
-                mockenzo.send("successful")//clients receive "successful"
+                ws.emit('message', 'message received of client');
             })
             .onError((error) => {
                 console.error('received error', error)
