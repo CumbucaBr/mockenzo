@@ -79,5 +79,9 @@ module.exports = function () {
       this.disconnect();
       httpServer.close();
     },
+    send: function(event, message) {
+      socketServer.emit(event, message)
+      return this;
+    }
   };
 };
