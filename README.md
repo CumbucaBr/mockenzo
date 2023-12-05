@@ -96,6 +96,7 @@ const mockenzo = Mockenzo()
         .on(3001)
             .onConnection(() => {
                 console.log('received new connection')
+                mockenzo.send('message', 'Hello World! You are connected');
             })
             .onMessage((ws, data) => {
                 console.log(data)//print message sent to server
@@ -107,7 +108,7 @@ const mockenzo = Mockenzo()
             .onClose(() => {
                 console.log("closing socket server")
             })
-        .start()
+        .start();
 ````
 
 ## Sample

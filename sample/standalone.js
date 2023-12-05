@@ -19,11 +19,12 @@ Mockenzo().http()
         console.log("http server is running")
     });
 
-Mockenzo()
+const mockenzo = Mockenzo()
     .socket()
     .on(3001)
     .onConnection(() => {
         console.log('received new connection')
+        mockenzo.send('message', 'Hello World! You are connected');
     })
     .onMessage((ws, data) => {
         console.log('on message', data)
